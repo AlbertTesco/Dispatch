@@ -1,0 +1,80 @@
+{% extends "newsletter_service/base.html" %}
+
+{% block users %}
+    <style>
+        .card {
+            height: auto;
+            background-color: #3f0f91;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .btn-group {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .btn {
+            width: calc(30% - 10px);
+            margin: 5px;
+            font-size: 14px; /* Изменяем размер шрифта кнопок */
+            white-space: nowrap; /* Предотвращаем перенос текста на кнопках на новую строку */
+        }
+
+
+        .btn-custom {
+            padding: 10px 20px; /* Настройте отступы кнопки по вашему усмотрению */
+            border-radius: 8px; /* Скругление углов кнопки */
+            font-size: 18px; /* Размер шрифта кнопки */
+            text-decoration: none; /* Убираем подчеркивание ссылки */
+            color: #fff; /* Цвет текста кнопки */
+            background-color: #007bff; /* Цвет фона кнопки */
+            border: none; /* Убираем границу */
+            transition: all 0.3s ease; /* Анимация при наведении */
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3; /* Измененный цвет фона при наведении */
+        }
+    </style>
+
+    <div class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for user in users %}
+                <div class="col-12 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-text"><strong>Username</strong>: {{ user.username }}</p>
+                            <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            {% if user.verified %}
+                                <a href="{% url 'users:deactivate_user' user.id %}"
+                                   class="btn btn-custom btn-lg w-100">
+                                    Деактивировать</a>
+                            {% else %}
+                                <a href="{% url 'users:activate_user' user.id %}"
+                                   class="btn btn-custom btn-lg w-100">
+                                    Активировать</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {#            <div class="col-12 col-md-3">#}
+            {#                <div class="card">#}
+            {#                    <div class="card-body d-flex align-items-center justify-content-center">#}
+            {#                                    <a href="{% url 'newsletter_service:add_client' %}" class="btn btn-custom btn-lg w-100">#}
+            {#                                        Добавить нового клиента#}
+            {#                        </a>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#            </div>#}
+        </div>
+    </div>
+{% endblock %}

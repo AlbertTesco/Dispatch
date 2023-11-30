@@ -1,0 +1,57 @@
+{#{% extends 'newsletter_service/base.html' %}#}
+{##}
+{#{% block logs %}#}
+{#    <body>#}
+{#    <h1>Mailing Log</h1>#}
+{#    <table>#}
+{#        <thead>#}
+{#        <tr>#}
+{#            <th>Рассылка</th>#}
+{#            <th>Дата и время последней попытки</th>#}
+{#            <th>Статус попытки</th>#}
+{#            <th>Ответ почтового сервера</th>#}
+{#        </tr>#}
+{#        </thead>#}
+{#        <tbody>#}
+{#        {% for log in logs %}#}
+{#            <tr>#}
+{#                <td>{{ log.mailing }}</td>#}
+{#                <td>{{ log.timestamp }}</td>#}
+{#                <td>{{ log.status }}</td>#}
+{#                <td>{{ log.server_response }}</td>#}
+{#            </tr>#}
+{#        {% endfor %}#}
+{#        </tbody>#}
+{#    </table>#}
+{#    </body>#}
+{#{% endblock %}#}
+{% extends 'newsletter_service/base.html' %}
+
+{% block logs %}
+    <div class="container mt-4">
+        <h1 class="mb-4">Mailing Log</h1>
+        <div class="table-responsive">
+            <table class="table table-bordered" style="border-color: #dae300;">
+                <thead class="thead-dark">
+                <tr style="color: #ff0000;">
+                    <th>Рассылка</th>
+                    <th>Дата и время последней попытки</th>
+                    <th>Статус попытки</th>
+                    <th>Ответ почтового сервера</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for log in logs %}
+                    <tr>
+                        <td style="color: #dae300;">{{ log.mailing }}</td>
+                        <td style="color: #dae300;">{{ log.timestamp }}</td>
+                        <td style="color: #dae300;">{{ log.status }}</td>
+                        <td style="color: #dae300;">{{ log.server_response }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+

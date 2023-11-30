@@ -1,0 +1,109 @@
+{% extends "newsletter_service/base.html" %}
+{##}
+{#{% block creat_blog_post %}#}
+{#    <style>#}
+{##}
+{#        form {#}
+{#            text-align: center; /* Выравнивание по центру */#}
+{#            max-width: 400px; /* Определите максимальную ширину формы, чтобы она не была слишком широкой */#}
+{#            margin: 0 auto; /* Горизонтальное выравнивание по центру */#}
+{##}
+{#        }#}
+{##}
+{#        h1 {#}
+{#            text-align: center; /* Выравнивание по центру */#}
+{#            max-width: 400px; /* Определите максимальную ширину формы, чтобы она не была слишком широкой */#}
+{#            margin: 0 auto; /* Горизонтальное выравнивание по центру */#}
+{#        }#}
+{##}
+{#        /* Дополнительные стили по желанию */#}
+{#        input[type="text"], textarea {#}
+{#            width: 100%; /* Заполнение всей доступной ширины */#}
+{#            padding: 10px; /* Подходящая внутренняя отступ */#}
+{#            margin-bottom: 10px; /* Отступ между полями ввода */#}
+{#        }#}
+{##}
+{#        button[type="submit"] {#}
+{#            display: block; /* Сделать кнопку блочным элементом */#}
+{#            margin: 10px auto;#}
+{#            background-color: #007BFF;#}
+{#            color: #fff;#}
+{#            padding: 10px 20px;#}
+{#            border: none;#}
+{#            border-radius: 5px;#}
+{#            text-decoration: none; /* Горизонтальное выравнивание кнопки по центру */#}
+{#        }#}
+{#    </style>#}
+{##}
+{#    <h1>Создать новую статью</h1>#}
+{##}
+{#    <form method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{##}
+{#        <button type="submit">Создать</button>#}
+{#    </form>#}
+{##}
+{#    <a href="{% url 'blog:blog_list' %}">Вернуться к списку статей</a>#}
+{##}
+{#{% endblock %}#}
+
+{% block creat_blog_post %}
+    <style>
+        /* CSS стили */
+        {#.container {#}
+        {#    text-align: center;#}
+        {#    max-width: 400px;#}
+        {#    margin: 0 auto;#}
+        {
+        #}#}
+        button[type="submit"] {
+            display: block;
+            margin: 10px auto;
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="container">
+        <h1>Создать новую статью</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <button type="submit">Создать</button>
+        </form>
+
+        <a href="{% url 'blog:blog_list' %}">Вернуться к списку статей</a>
+    </div>
+{% endblock %}
+

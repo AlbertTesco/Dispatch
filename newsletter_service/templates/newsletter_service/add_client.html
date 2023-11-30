@@ -1,0 +1,70 @@
+{% extends "newsletter_service/base.html" %}
+
+{% block add_clients %}
+    <style>
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            color: white;
+            align-items: center; /* Выравнивание по центру по горизонтали */
+        }
+
+        .card {
+            background-color: #37196b;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+            text-align: center; /* Выравнивание по центру по горизонтали */
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group textarea {
+            background-color: rgba(114, 110, 117, 0.61);
+            color: white;
+            border: 1px solid #da0101;
+        }
+
+        .btn-primary {
+            display: block;
+            margin: 0 auto; /* Выравнивание кнопки по центру по горизонтали */
+        }
+    </style>
+
+    <div class="container col-6 mt-5">
+        <div class="row justify-content-center">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="card-title text-center">Добавление нового клиента</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {{ form.email.label_tag }} <br/>
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.name.label_tag }} <br/>
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.surname.label_tag }} <br/>
+                            {{ form.surname }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.patronymic.label_tag }} <br/>
+                            {{ form.patronymic }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.comment.label_tag }} <br/>
+                            {{ form.comment }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Добавить клиента</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

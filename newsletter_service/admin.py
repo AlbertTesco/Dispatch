@@ -5,15 +5,15 @@ from .models import Client, Mailing, Message, MailingLog
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('full_name', 'email', 'comment')
-    search_fields = ('full_name', 'email')
-    list_filter = ('full_name', 'email')
+    list_display = ('name', 'surname', 'patronymic', 'email', 'comment')
+    search_fields = ('name', 'surname', 'patronymic', 'email')
+    list_filter = ('name', 'surname', 'patronymic', 'email')
 
 
 @admin.register(Mailing)
 class MailingAdmin(admin.ModelAdmin):
-    list_display = ('client', 'send_time', 'frequency', 'status')
-    list_filter = ('client', 'send_time', 'frequency', 'status')
+    list_display = ('id', 'send_time', 'frequency', 'status',)
+    list_filter = ('id', 'send_time', 'frequency', 'status',)
 
 
 @admin.register(Message)

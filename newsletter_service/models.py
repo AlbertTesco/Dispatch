@@ -1,22 +1,36 @@
 from django.db import models
 
+NULLABLE = {
+    'blank': True,
+    'null': True,
+}
+
 
 class Client(models.Model):
     email = models.EmailField(verbose_name="Эл.почта")
-    full_name = models.CharField(max_length=100, verbose_name="ФИО")
+    name = models.CharField(max_length=20, verbose_name="Имя", **NULLABLE)
+    surname = models.CharField(max_length=20, **NULLABLE, verbose_name="Фамилия")
+    patronymic = models.CharField(max_length=20, **NULLABLE, verbose_name="Отчество")
     comment = models.TextField(verbose_name="Комментарий")
-
     def __str__(self):
-        return self.email
+        return f"{self.name}, {self.surname}, {self.patronymic}"
 
     class Meta:
         verbose_name = "Клиент"
         verbose_name_plural = "Клиенты"
 
+    def make_active(self):
+        self.is_active = True
+        self.save()
+
+    def inactive(self):
+        self.is_active = False
+        self.save()
+
 
 class Mailing(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name="Клиент")
-    send_time = models.DateTimeField(auto_now_add=True, verbose_name="Время отправки")
+    client = models.ManyToManyField(Client, verbose_name="Клиенты")
+    send_time = models.DateTimeField(verbose_name="Время отправки")
 
     frequency_choices = [
         ('daily', 'Раз в день'),

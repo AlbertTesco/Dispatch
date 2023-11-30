@@ -1,0 +1,53 @@
+{% extends "newsletter_service/base.html" %}
+
+{% block mailing_list %}
+    <style>
+        .card {
+            height: 100%;
+            background-color: #3f0f91;
+            border-radius: 15px;
+            margin-bottom: 20px; /* Добавим отступ снизу между карточками */
+        }
+
+        .btn {
+            border-radius: 0; /* Убираем закругление у всех кнопок */
+        }
+    </style>
+
+    <div class="container mt-5">
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for mailing in mailings %}
+                <div class="col-12 col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title font-weight-bold">{{ mailing.title }}</h3>
+                            <p class="card-text">Статус: {{ mailing.status }}</p>
+                            <p class="card-text">Время отправки: {{ mailing.send_time }}</p>
+                            <!-- Accessing related messages -->
+                            <p class="card-text">Содержание рассылки:</p>
+                            <ul>
+                                {% for message in mailing.message_set.all %}
+                                    <li>Заголовок: {{ message.subject }}</li>
+                                    <li>Сообщение: {{ message.body }}</li>
+                                    <!-- Access other fields of message if needed -->
+                                {% endfor %}
+                            </ul>
+                            <!-- Add other fields you want to display -->
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            {% if mailing.status == 'started' %}
+                                <a class="p-2 btn btn-primary"
+                                   href="{% url 'newsletter_service:send_mailing' pk=mailing.pk %}">Остановить</a>
+                            {% else %}
+                                <a class="p-2 btn btn-primary"
+                                   href="{% url 'newsletter_service:send_mailing' pk=mailing.pk %}">Начать</a>
+                            {% endif %}
+                            <button type="button" class="btn btn-info">Изменить</button>
+                            <a class="p-2 btn btn-danger"
+                               href="{% url 'newsletter_service:delete_mailing' pk=mailing.pk %}">Удалить</a></div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

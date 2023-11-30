@@ -1,0 +1,14 @@
+{% extends "newsletter_service/base.html" %}
+
+{% block post_detail %}
+
+    <div class="blog-post-detail">
+        <h1>{{ object.title }}</h1>
+        <p class="post-date">{{ object.created_at|date:"Y-m-d" }}</p>
+        <p class="post-content">{{ object.content }}</p>
+
+        <p class="view-count">Просмотров: {{ object.view_counter }}</p>
+
+    </div>
+
+{% endblock %}

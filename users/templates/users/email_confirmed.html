@@ -1,0 +1,78 @@
+{#{% extends "newsletter_service/base.html" %}#}
+{##}
+{#{% block confirm_email %}#}
+{##}
+{#    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">#}
+{#        <h1 class="display-4">Активация аккаунта</h1>#}
+{#    </div>#}
+{##}
+{#    <div class="container">#}
+{#        <div class="row text-start">#}
+{#            <div class="col-lg-4 col-md-6 col-sm-12">#}
+{#                <div class="card mb-4 box-shadow">#}
+{#                    <div class="card-header">#}
+{#                        <h4 class="my-0 font-weight-normal">Верификация аккаунта</h4>#}
+{#                    </div>#}
+{#                    <div class="card-body">#}
+{#                        <form method="post"  class="form-floating">#}
+{#                            <p>Мы отправили письмо на вашу почту, чтобы подтвердить регистрацию аккаунта</p>#}
+{#                            {% csrf_token %}#}
+{#                            {{ form.as_p }}#}
+{#                            <div class="mb-3">#}
+{#                                <input type="text" name="verify_code" class="form-control" id="verify_code"#}
+{#                                       placeholder="Введите код из письма" required>#}
+{#                            </div>#}
+{#                            <input type="submit" class="btn btn-success">#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}
+{% extends "newsletter_service/base.html" %}
+
+
+
+
+{% block confirm_email %}
+    <style>
+        body {
+            background-color: #000128; /* Цвет фона страницы */
+        }
+
+        .custom-card {
+            background-color: #3f0f91; /* Цвет фона для карточки */
+            border-radius: 10px; /* Закругление углов карточки */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень для карточки */
+        }
+
+        .custom-card .card-body {
+            padding: 20px; /* Отступы внутри карточки */
+        }
+
+        .btn-success{
+            background-color: #ff0000;
+        }
+    </style>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <div class="card custom-card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Активация аккаунта</h1>
+                        <form method="post" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-success w-100 mt-3">Подтвердить</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
